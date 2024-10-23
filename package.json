@@ -1,0 +1,12 @@
+{
+  "name": "js-automated-testing",
+  "version": "1.0.0",
+  "description": "This project aimed to store practical task's code for \"Automated Testing Mentoring with JS: Basic\" program. \r This project has three branches: \r - Unit tests home task\r - UI tests home tasks\r - API tests home tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "aleksei_vasilev6@epam.com",
+  "license": "ISC"
+}
