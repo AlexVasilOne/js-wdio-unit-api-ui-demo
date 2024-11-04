@@ -1,18 +1,11 @@
 const { expect } = require('chai');
-const { describe, it, beforeEach, afterEach } = require('mocha');
+const { describe, it } = require('mocha');
 
 const NumbersValidator = require('../../app/numbers-validator');
 
 describe('isInteger', () => {
-  let validator;
+  const validator = new NumbersValidator();
 
-  beforeEach(() => {
-    validator = new NumbersValidator();
-  });
-
-  afterEach(() => {
-    validator = null;
-  });
   describe('positive tests', () => {
     it('should return true all elements of array is numbers', () => {
       expect(validator.isInteger(2)).to.be.equal(true);
@@ -20,6 +13,7 @@ describe('isInteger', () => {
       expect(validator.isInteger(-678)).to.be.equal(true);
     });
   });
+
   describe('negative tests', () => {
     it('should false if number isnt integer', () => {
       expect(validator.isInteger(2.23)).to.be.equal(false);
