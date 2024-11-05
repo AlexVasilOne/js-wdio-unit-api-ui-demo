@@ -1,2 +1,6 @@
 # Dependency directory
 node_modules/
+
+#Test Reports
+coverage/
+mochawesome-report/

@@ -4,9 +4,22 @@
   "description": "This project aimed to store practical task's code for \"Automated Testing Mentoring with JS: Basic\" program. \r This project has three branches: \r - Unit tests home task\r - UI tests home tasks\r - API tests home tasks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "coverage": "c8 npm test",
+    "lint": "eslint ./ --fix"
   },
   "keywords": [],
   "author": "aleksei_vasilev6@epam.com",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@eslint/js": "^9.13.0",
+    "c8": "^10.1.2",
+    "chai": "^4.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "globals": "^15.11.0",
+    "mocha": "^10.8.0",
+    "mochawesome": "^7.1.3"
+  }
 }
