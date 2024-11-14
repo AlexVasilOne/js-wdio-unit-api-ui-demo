@@ -1,12 +1,12 @@
-const path = require('path');
+const FileLoadHelper = require('../helpers/fileLoadHelper');
+const LoginHelper = require('../helpers/loginHelper');
 
 describe('Verify that "Select all metrics" checkbox set/unset all others check-boxes', () => {
   before(async () => {
+    LoginHelper.login(browser, process.env.TOKEN_CURRENT_USER);
+    await $('//button[text()="+ Upload New Dataset"]').click(); 
+    await FileLoadHelper.loadFile('sample-file.csv');
     // navigating to the "Select Metrics" page
-    const filePath = path.join(process.cwd(), 'test-data/sample-file.csv');
-    await browser.url('/assure');
-    await $('//button[text()="+ Upload New Dataset"]').click();
-    await $('input[type="file"]').addValue(filePath);
     await $('//button[text()="Preview File"]').click();
     await $('//button[text()="Select Metrics"]').click();
   });
@@ -44,4 +44,5 @@ describe('Verify that "Select all metrics" checkbox set/unset all others check-b
     await $('//h4[text()="hallucination"]').click();
     await expect(buttonStartTest).toBeEnabled();
   });
+
 });
