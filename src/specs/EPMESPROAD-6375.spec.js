@@ -3,7 +3,7 @@ const LoginHelper = require('../helpers/loginHelper');
 
 describe('Verify that files uploading', () => {
   before(async () => {
-    LoginHelper.login(browser, process.env.TOKEN_CURRENT_USER);
+    await LoginHelper.login(browser, process.env.TOKEN_CURRENT_USER);
     await $('//button[text()="+ Upload New Dataset"]').click();
   });
   it('Verify that the file can be deleted by clicking on the “x” button.', async () => {
