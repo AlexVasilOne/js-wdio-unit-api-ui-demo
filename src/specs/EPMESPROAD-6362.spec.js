@@ -2,7 +2,7 @@ const FileLoadHelper = require('../helpers/fileLoadHelper');
 const LoginHelper = require('../helpers/loginHelper');
 const MetricsHelper = require('../helpers/metricsHelper');
 
-describe('Verify that "Select all metrics" checkbox set/unset all others check-boxes', () => {
+describe('Verify check-boxes on metrics page', () => {
   //setting all checkboxes as a global vars for test suite
   let checkboxesRagas;
   let checkboxesDeepEval;
