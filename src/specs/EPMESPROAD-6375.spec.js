@@ -2,10 +2,11 @@ const FileLoadHelper = require('../helpers/fileLoadHelper');
 const LoginHelper = require('../helpers/loginHelper');
 
 describe('Verify that files uploading', () => {
-  before(async () => {
+  beforeEach(async () => {
     await LoginHelper.login(browser, process.env.TOKEN_CURRENT_USER);
     await $('//button[text()="+ Upload New Dataset"]').click();
   });
+
   it('Verify that the file can be deleted by clicking on the “x” button.', async () => {
     let uploadLink = await $('//section//div[text()="browse"]');
     await expect(uploadLink).toBeEnabled(); // uploading button is available
@@ -16,6 +17,7 @@ describe('Verify that files uploading', () => {
     uploadLink = $('//section//div[text()="browse"]');
     await expect(uploadLink).toBeEnabled(); // uploading button is available again
   });
+
   it('Verify impossibility to upload not a .csv file', async () => {
     const previewButton = await $('//button[text()="Preview File"]');
     await FileLoadHelper.loadFile('sample-file.txt');
@@ -23,5 +25,27 @@ describe('Verify that files uploading', () => {
     const errorDiv = $('//section//div[text()="Error: Invalid file type, only CSV allowed"]');
     await expect(errorDiv).toBeDisplayed();
     await expect(previewButton).not.toBeEnabled();
+  });
+
+  it('Verify ability navigate throw upload pages sidebar elemenets using keyboard (a11y)', async () => {
+    const homeLink = await $('aside a[href="/assure"]');
+    const TAB = '\u0009';
+    await homeLink.waitForDisplayed();
+    //later we can add more elements 
+    // and use tab + shift to navigate back 
+    // performActions can be especialy usefuul in that case
+    await browser.performActions([{
+      type: 'key',
+      id: 'keyboard',
+      actions: [
+        { type: 'keyDown', value: TAB },
+        { type: 'keyUp', value: TAB },
+      ]
+    }]);
+    await browser.waitUntil(
+      async () => await homeLink.isFocused(),
+      { timeout: 2000, interval: 500, timeoutMsg: "not focused" }
+    );
+    await browser.releaseActions();
   });
 });
