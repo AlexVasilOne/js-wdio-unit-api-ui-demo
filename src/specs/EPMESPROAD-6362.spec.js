@@ -1,6 +1,6 @@
-const FileLoadHelper = require('../helpers/fileLoadHelper');
-const LoginHelper = require('../helpers/loginHelper');
-const MetricsHelper = require('../helpers/metricsHelper');
+const loadFile = require('../helpers/fileLoadHelper');
+const login = require('../helpers/loginHelper');
+const {getMetrics, setMetrics, validateMetrics} = require('../helpers/metricsHelper');
 
 describe('Verify check-boxes on metrics page', () => {
   //setting all checkboxes as a global vars for test suite
@@ -8,19 +8,19 @@ describe('Verify check-boxes on metrics page', () => {
   let checkboxesDeepEval;
 
   before(async () => {
-    await LoginHelper.login(browser, process.env.TOKEN_CURRENT_USER);
+    await login(browser, process.env.TOKEN_CURRENT_USER);
     await $('//button[text()="+ Upload New Dataset"]').click();
-    await FileLoadHelper.loadFile('sample-file.csv');
+    await loadFile('sample-file.csv');
     // navigating to the "Select Metrics" page
     await $('//button[text()="Preview File"]').click();
     await $('//button[text()="Select Metrics"]').click();
-    await browser.pause(500);
+    await $('//section//h4[text()="Select RAGAS Metrics"]').waitForDisplayed();
     checkboxesRagas = await $$('//h4[text()="Select RAGAS Metrics"]/ancestor::div[1]//input[@type="checkbox"]');
     checkboxesDeepEval = await $$('//h4[text()="Select DeepEval Metrics"]/ancestor::div[1]//input[@type="checkbox"]');
   });
   //to makee all tests independent we should reset checkboxes
   afterEach(async () => {
-    await browser.pause(500);
+    await $('//section//h4[text()="Select RAGAS Metrics"]').waitForDisplayed();
     const checkboxes = await $$('label[class*="checkbox"]');
     for (const el of checkboxes) {
       const ariaChecked = await el.$('input[type="checkbox"]').getAttribute("aria-checked");
@@ -53,8 +53,8 @@ describe('Verify check-boxes on metrics page', () => {
   });
 
   it('should use local storage for saving users selected checkboxes', async () => {
-    const metrics = await MetricsHelper.getMetrics();
-    await MetricsHelper.setMetrics(metrics);
+    const metrics = await getMetrics();
+    await setMetrics(metrics);
     const selectedDeepEvalMetrics = await browser.execute(() => {
       return window.localStorage.getItem('individualDeepEvalMetrics');
     });
@@ -67,12 +67,12 @@ describe('Verify check-boxes on metrics page', () => {
   });
 
   it('should save metrics state when serfing pages back and forward', async () => {
-    let metrics = await MetricsHelper.getMetrics();
-    await MetricsHelper.setMetrics(metrics); 
+    let metrics = await getMetrics();
+    await setMetrics(metrics); 
     await $('//button[text()="Back"]').click();
     await $('//button[text()="Select Metrics"]').click();
-    metrics = await MetricsHelper.getMetrics();
-    await MetricsHelper.validateMetrics();
+    metrics = await getMetrics();
+    await validateMetrics();
   });
 
   it('checkbox should change border-color when hovering', async () => {
