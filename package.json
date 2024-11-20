@@ -16,7 +16,11 @@
   "devDependencies": {
     "@wdio/cli": "^9.2.8",
     "@wdio/local-runner": "^9.2.8",
-    "@wdio/mocha-framework": "^9.2.8"
+    "@wdio/mocha-framework": "^9.2.8",
+    "chromedriver": "^131.0.1",
+    "geckodriver": "^5.0.0",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.2"
   },
   "dependencies": {
     "@eslint/js": "^9.13.0",
