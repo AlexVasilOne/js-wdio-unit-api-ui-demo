@@ -1,7 +1,7 @@
 {
   "name": "js-automated-testing",
   "version": "1.0.0",
-  "description": "This project aimed to store practical task's code for \"Automated Testing Mentoring with JS: Basic\" program. \r This project has three branches: \r - Unit tests home task\r - UI tests home tasks\r - API tests home tasks",
+  "description": "This project aimed to store practical task's code for \"Automated Testing Mentoring with JS: Basic\" program.",
   "main": "index.js",
   "scripts": {
     "wdio": "wdio run ./wdio.conf.js",
@@ -14,12 +14,20 @@
   "author": "aleksei_vasilev6@epam.com",
   "license": "ISC",
   "devDependencies": {
+    "@wdio/allure-reporter": "^9.2.14",
     "@wdio/cli": "^9.2.8",
+    "@wdio/junit-reporter": "^9.2.14",
     "@wdio/local-runner": "^9.2.8",
-    "@wdio/mocha-framework": "^9.2.8"
+    "@wdio/mocha-framework": "^9.2.8",
+    "@wdio/spec-reporter": "^9.2.14",
+    "chromedriver": "^131.0.1",
+    "geckodriver": "^5.0.0",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.2"
   },
   "dependencies": {
     "@eslint/js": "^9.13.0",
+    "allure-commandline": "^2.32.0",
     "c8": "^10.1.2",
     "chai": "^4.5.0",
     "dotenv": "^16.4.5",

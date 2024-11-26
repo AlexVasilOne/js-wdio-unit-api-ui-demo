@@ -4,6 +4,9 @@ node_modules/
 #Test Reports
 coverage/
 mochawesome-report/
+artifacts
+report
+allure*
 
 #Secrets
 .env
