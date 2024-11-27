@@ -4,7 +4,7 @@
   "description": "This project aimed to store practical task's code for \"Automated Testing Mentoring with JS: Basic\" program.",
   "main": "index.js",
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js",
+    "wdio": "wdio run ./src-wdio/config/wdio.conf.js",
     "pretest": "npm run lint",
     "test": "mocha",
     "coverage": "c8 npm test",

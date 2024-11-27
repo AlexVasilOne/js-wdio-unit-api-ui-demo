@@ -3,3 +3,6 @@ coverage
 mochawesome-report
 wdio.conf.js
 src
+allure* 
+artifacts
+report
