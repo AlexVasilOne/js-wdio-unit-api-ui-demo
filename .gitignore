@@ -2,6 +2,7 @@
 node_modules/
 
 #Test Reports
+src-wdio/reports/*
 coverage/
 mochawesome-report/
 artifacts
