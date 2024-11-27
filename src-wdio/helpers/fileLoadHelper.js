@@ -1,6 +1,6 @@
 const path = require('path');
 async function loadFile(fileName) {
-  const filePath = path.join(process.cwd(), `test-data/${fileName}`);
+  const filePath = path.join(process.cwd(), `src-wdio/test-data/${fileName}`);
   await $('input[type="file"]').addValue(filePath);
   //it can take a time to download a file
   const xpath = `//section//div[text()="${fileName.slice(0, -4)}"]`;
