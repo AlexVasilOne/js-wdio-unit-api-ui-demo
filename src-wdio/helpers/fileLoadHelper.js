@@ -1,11 +1,9 @@
 const path = require('path');
-async function loadFile(fileName) {
+async function loadFile(uploadPage, fileName) {
   const filePath = path.join(process.cwd(), `src-wdio/test-data/${fileName}`);
-  await $('input[type="file"]').addValue(filePath);
-  //it can take a time to download a file
-  const xpath = `//section//div[text()="${fileName.slice(0, -4)}"]`;
+  await uploadPage.dropZone.input.addValue(filePath);
   await browser.waitUntil(
-    async () => await $(xpath).isDisplayed(),
+    async () => await uploadPage.fileCard.rootEl.isDisplayed(),
     { timeout: 5000, interval: 500, timeoutMsg: "file not loaded" }
   );
 }
