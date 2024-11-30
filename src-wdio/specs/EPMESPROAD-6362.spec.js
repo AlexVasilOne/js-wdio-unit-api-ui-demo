@@ -1,9 +1,8 @@
-const {getMetrics, setMetrics, validateMetrics} = require('../helpers/metricsHelper');
 const checkBoxPage = require('./../po/pages/checkboxes.page');
 
 describe('Verify check-boxes on metrics page', () => {
   before(async () => {
-    await checkBoxPage.open(); 
+    await checkBoxPage.open();
     await checkBoxPage.ragasBlock.header.waitForDisplayed();
   });
   //to makee all tests independent we should reset checkboxes
@@ -33,15 +32,17 @@ describe('Verify check-boxes on metrics page', () => {
   });
 
   it('Verify while at least one checkbox is not set button "Start test" is not available', async () => {
-    const buttonStartTest = $('//button[text()="Start Test Campaign"]');
-    await expect(buttonStartTest).not.toBeEnabled();
-    await $('//h4[text()="hallucination"]').click();
-    await expect(buttonStartTest).toBeEnabled();
+    await expect(checkBoxPage.button('start')).not.toBeEnabled();
+    await checkBoxPage.deepEvalBlock.getCheckBoxHeader('hallucination').click();
+    await expect(checkBoxPage.button('start')).toBeEnabled();
   });
 
   it('should use local storage for saving users selected checkboxes', async () => {
-    const metrics = await getMetrics();
-    await setMetrics(metrics);
+    await checkBoxPage.deepEvalBlock.getCheckBoxHeader('contextual_relevancy').click();
+    await checkBoxPage.deepEvalBlock.getCheckBoxHeader('faithfulness').click();
+    await checkBoxPage.ragasBlock.getCheckBoxHeader('answer_relevancy').click();
+    await checkBoxPage.ragasBlock.getCheckBoxHeader('harmfulness').click();
+
     const selectedDeepEvalMetrics = await browser.execute(() => {
       return window.localStorage.getItem('individualDeepEvalMetrics');
     });
@@ -54,12 +55,18 @@ describe('Verify check-boxes on metrics page', () => {
   });
 
   it('should save metrics state when serfing pages back and forward', async () => {
-    let metrics = await getMetrics();
-    await setMetrics(metrics); 
+    await checkBoxPage.deepEvalBlock.getCheckBoxHeader('hallucination').click();
+    await checkBoxPage.deepEvalBlock.getCheckBoxHeader('bias').click();
+    await checkBoxPage.ragasBlock.getCheckBoxHeader('answer_similarity').click();
+    await checkBoxPage.ragasBlock.getCheckBoxHeader('harmfulness').click();
+
     await $('//button[text()="Back"]').click();
     await $('//button[text()="Select Metrics"]').click();
-    metrics = await getMetrics();
-    await validateMetrics();
+
+    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('hallucination')).toHaveAttribute('aria-checked', 'true');
+    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('bias')).toHaveAttribute('aria-checked', 'true');
+    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('answer_similarity')).toHaveAttribute('aria-checked', 'true');
+    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('harmfulness')).toHaveAttribute('aria-checked', 'true');
   });
 
   it('checkbox should change border-color when hovering', async () => {
@@ -67,7 +74,7 @@ describe('Verify check-boxes on metrics page', () => {
     for (const checkbox of checkboxes) {
       await checkbox.moveTo();
       const color = await checkbox.getCSSProperty('border-color');
-      expect(color.parsed.hex).toEqual('#095ed9'); 
+      expect(color.parsed.hex).toEqual('#095ed9');
     }
   });
 });
