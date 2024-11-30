@@ -8,11 +8,10 @@ describe('Verify check-boxes on metrics page', () => {
   //to makee all tests independent we should reset checkboxes
   afterEach(async () => {
     await checkBoxPage.ragasBlock.header.waitForDisplayed();
-    const checkboxes = await $$('label[class*="checkbox"]');
-    for (const el of checkboxes) {
-      const ariaChecked = await el.$('input[type="checkbox"]').getAttribute("aria-checked");
+    for (const label of await checkBoxPage.allLabels) {
+      const ariaChecked = await label.$('input[type="checkbox"]').getAttribute("aria-checked");
       if (ariaChecked === 'true') {
-        await el.click();
+        await label.click();
       }
     };
   });
@@ -70,8 +69,7 @@ describe('Verify check-boxes on metrics page', () => {
   });
 
   it('checkbox should change border-color when hovering', async () => {
-    const checkboxes = await $$('div[class*="checkbox"]');
-    for (const checkbox of checkboxes) {
+    for (const checkbox of await checkBoxPage.allDivs) {
       await checkbox.moveTo();
       const color = await checkbox.getCSSProperty('border-color');
       expect(color.parsed.hex).toEqual('#095ed9');

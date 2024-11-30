@@ -9,7 +9,6 @@ class CheckBoxesPage extends Page {
     this.ragasBlock = new MetricsBlockComponent('Select RAGAS Metrics'); 
     this.deepEvalBlock = new MetricsBlockComponent('Select DeepEval Metrics');
   }
-
   async open(){
     await uploadPage.open();
     await loadFile(uploadPage, 'sample-file.csv');
@@ -24,7 +23,12 @@ class CheckBoxesPage extends Page {
     };
     return $(selectors[name]); 
   }
-
+  get allLabels() {
+    return $$('label[class*="checkbox"]');
+  }
+  get allDivs() {
+    return $$('div[class*="checkbox"]');
+  }
 }
 
 module.exports = new CheckBoxesPage(); 
