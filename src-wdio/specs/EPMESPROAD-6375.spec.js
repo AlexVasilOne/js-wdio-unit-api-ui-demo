@@ -1,10 +1,9 @@
-const loadFile = require('../helpers/fileLoadHelper');
-const login = require('../helpers/loginHelper');
+const loadFile = require('./../helpers/fileLoadHelper');
+const uploadPage = require('./../po/pages/upload.page'); 
 
 describe('Verify that files uploading', () => {
   beforeEach(async () => {
-    await login(browser, process.env.TOKEN_CURRENT_USER);
-    await $('//button[text()="+ Upload New Dataset"]').click();
+    await uploadPage.open(); 
   });
 
   it('Verify that the file can be deleted by clicking on the “x” button.', async () => {

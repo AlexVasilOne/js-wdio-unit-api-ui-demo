@@ -24,8 +24,16 @@ exports.config = {
   // of the config file unless it's absolute.
   //
   specs: [
-    '../specs/**/*.spec.js',
+    './../specs/**/*.spec.js',
   ],
+  suites: {
+    checkboxes: [
+        './../specs/**/EPMESPROAD-6362.spec.js'
+    ],
+    uploading: [
+        './../specs/**/EPMESPROAD-6375.spec.js'
+    ]
+},
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'

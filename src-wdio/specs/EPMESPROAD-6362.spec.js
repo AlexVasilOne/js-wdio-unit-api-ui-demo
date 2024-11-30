@@ -1,6 +1,7 @@
 const loadFile = require('../helpers/fileLoadHelper');
 const login = require('../helpers/loginHelper');
 const {getMetrics, setMetrics, validateMetrics} = require('../helpers/metricsHelper');
+const welcomePage = require('./../po/pages/welcome.page');
 
 describe('Verify check-boxes on metrics page', () => {
   //setting all checkboxes as a global vars for test suite
@@ -8,8 +9,9 @@ describe('Verify check-boxes on metrics page', () => {
   let checkboxesDeepEval;
 
   before(async () => {
+    await welcomePage.open();
     await login(browser, process.env.TOKEN_CURRENT_USER);
-    await $('//button[text()="+ Upload New Dataset"]').click();
+    await welcomePage.btnUploadNewDataset.click();
     await loadFile('sample-file.csv');
     // navigating to the "Select Metrics" page
     await $('//button[text()="Preview File"]').click();

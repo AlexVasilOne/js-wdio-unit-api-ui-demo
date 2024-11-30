@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "wdio": "wdio run ./src-wdio/config/wdio.conf.js",
+    "wdio:checkboxes": "wdio run ./src-wdio/config/wdio.conf.js --suite checkboxes",
+    "wdio:uploading": "wdio run ./src-wdio/config/wdio.conf.js --suite uploading",
     "pretest": "npm run lint",
     "test": "mocha",
     "coverage": "c8 npm test",
