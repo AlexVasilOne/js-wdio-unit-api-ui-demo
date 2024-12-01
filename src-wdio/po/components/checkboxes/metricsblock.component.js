@@ -1,6 +1,10 @@
 const BaseComponent = require("../base.component");
 
 class MetricsBlockComponent extends BaseComponent {
+  /**
+   * 
+   * @param {'Select RAGAS Metrics' | 'Select DeepEval Metrics'} blockName 
+   */
   constructor(blockName) {
     super(`//h4[text()="${blockName}"]/ancestor::div[1]`);
     this.blockName = blockName;

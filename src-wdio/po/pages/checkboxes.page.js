@@ -1,7 +1,7 @@
 const Page = require('./base.page');
 const uploadPage = require('./upload.page');
 const loadFile = require('./../../helpers/fileLoadHelper');
-const MetricsBlockComponent = require('./../components/checkboxes/metricsblock.component');
+const { MetricsBlockComponent } = require('./../components');
 
 class CheckBoxesPage extends Page {
   constructor() {
@@ -15,6 +15,11 @@ class CheckBoxesPage extends Page {
     await uploadPage.btnPreviewFile.click(); 
     return $('//button[text()="Select Metrics"]').click();
   }
+  /**
+   * 
+   * @param {'back' | 'reset' | 'start'} name 
+   * @returns {*}
+   */
   button(name) {
     const selectors = {
       back: '//button[text()="Back"]',

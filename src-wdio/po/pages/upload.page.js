@@ -1,9 +1,11 @@
 const Page = require('./base.page.js');
 const welcomePage = require('./welcome.page');
 const login = require('./../../helpers/loginHelper');
-const DropComponent = require('./../components/upload/drop.component');
-const FileCardComponent = require('./../components/upload/filecard.component');
-const SidePanelComponent = require('../components/sidepanel.component');
+const {
+  DropComponent,
+  FileCardComponent,
+  SidePanelComponent
+} = require('./../components');
 
 class UploadPage extends Page {
   constructor() {
