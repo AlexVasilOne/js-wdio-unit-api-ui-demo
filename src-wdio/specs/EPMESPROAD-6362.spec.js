@@ -9,25 +9,20 @@ describe('Verify check-boxes on metrics page', () => {
   afterEach(async () => {
     await checkBoxPage.ragasBlock.header.waitForDisplayed();
     for (const label of await checkBoxPage.allLabels) {
-      const ariaChecked = await label.$('input[type="checkbox"]').getAttribute("aria-checked");
-      if (ariaChecked === 'true') {
+      const ariaChecked = await label.$('input[type="checkbox"]');
+      if (ariaChecked.isSelected()) {
         await label.click();
       }
     };
   });
 
   it('should set/unset all checkboxes in RAGAS block', async () => {
-    // Selecting all metrics checkboxes within RAGAS block
     await checkBoxPage.ragasBlock.btnSelectAll.click();
-    // Ragas checkboxes are set
-    await checkBoxPage.ragasBlock.allIputs.map((el) => expect(el).toHaveAttribute('aria-checked', 'true'));
-    await checkBoxPage.deepEvalBlock.allIputs.map((el) => expect(el).toHaveAttribute('aria-checked', 'false'));
-    // UNselecting all metrics checkboxes within RAGAS block
+    await checkBoxPage.ragasBlock.allIputs.map((el) => expect(el).toBeChecked());
+    await checkBoxPage.deepEvalBlock.allIputs.map((el) => expect(el).not.toBeChecked());
     await checkBoxPage.ragasBlock.btnSelectAll.click();
-    // Ragas checkboxes are unset
-    await checkBoxPage.ragasBlock.allIputs.map((el) => expect(el).toHaveAttribute('aria-checked', 'false'));
-    // DEEPEVAL checkboxes are still unset
-    await checkBoxPage.deepEvalBlock.allIputs.map((el) => expect(el).toHaveAttribute('aria-checked', 'false'));
+    await checkBoxPage.ragasBlock.allIputs.map((el) => expect(el).not.toBeChecked());
+    await checkBoxPage.deepEvalBlock.allIputs.map((el) => expect(el).not.toBeChecked());
   });
 
   it('Verify while at least one checkbox is not set button "Start test" is not available', async () => {
@@ -62,10 +57,10 @@ describe('Verify check-boxes on metrics page', () => {
     await $('//button[text()="Back"]').click();
     await $('//button[text()="Select Metrics"]').click();
 
-    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('hallucination')).toHaveAttribute('aria-checked', 'true');
-    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('bias')).toHaveAttribute('aria-checked', 'true');
-    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('answer_similarity')).toHaveAttribute('aria-checked', 'true');
-    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('harmfulness')).toHaveAttribute('aria-checked', 'true');
+    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('hallucination')).toBeChecked();
+    await expect(checkBoxPage.deepEvalBlock.getCheckBoxInput('bias')).toBeChecked();
+    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('answer_similarity')).toBeChecked();
+    await expect(checkBoxPage.ragasBlock.getCheckBoxInput('harmfulness')).toBeChecked();
   });
 
   it('checkbox should change border-color when hovering', async () => {
