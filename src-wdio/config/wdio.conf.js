@@ -24,8 +24,16 @@ exports.config = {
   // of the config file unless it's absolute.
   //
   specs: [
-    'src/specs/**/*.spec.js',
+    './../specs/**/*.spec.js',
   ],
+  suites: {
+    checkboxes: [
+        './../specs/**/EPMESPROAD-6362.spec.js'
+    ],
+    uploading: [
+        './../specs/**/EPMESPROAD-6375.spec.js'
+    ]
+},
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -133,12 +141,12 @@ exports.config = {
   // see also: https://webdriver.io/docs/dot-reporter
   // reporters: ['dot'],
   reporters: ['spec', ['junit', {
-    outputDir: './report',
+    outputDir: 'src-wdio/reports/junit-report',
     outputFileFormat: function (options) {
       return `results-${options.cid}.xml`
     },
   }], ['allure', {
-    outputDir: 'allure-results',
+    outputDir: 'src-wdio/reports/allure-results',
     disableWebdriverStepsReporting: true,
     disableWebdriverScreenshotsReporting: true,
     }
@@ -303,7 +311,8 @@ exports.config = {
 
   onComplete: function () {
     const reportError = new Error('Could not generate Allure report');
-    const generation = allure(['generate', 'allure-results', '--clean']);
+    const generation = allure(['generate', 'src-wdio/reports/allure-results', '--clean', '-o src-wdio/reports/allure-report']);
+    // to open report type "allure open src-wdio/reports/allure-report"
 
     return new Promise((resolve, reject) => {
       const generationTimeout = setTimeout(() => reject(reportError), 5000);

@@ -2,11 +2,12 @@
 node_modules/
 
 #Test Reports
-coverage/
-mochawesome-report/
+src-wdio/reports
+coverage
+mochawesome-report
 artifacts
 report
-allure*
+artifacts
 
 #Secrets
 .env

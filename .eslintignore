@@ -2,4 +2,7 @@ node_modules
 coverage
 mochawesome-report
 wdio.conf.js
-src
+src-wdio
+allure* 
+artifacts
+report

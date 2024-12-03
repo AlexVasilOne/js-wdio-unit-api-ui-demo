@@ -1,5 +1,4 @@
-async function login(browser, tokenValue) {
-  await browser.url('/assure');
+async function login(tokenValue) {
   await browser.execute((tokenValue) => {
     window.localStorage.setItem('token', tokenValue);
   }, tokenValue);
