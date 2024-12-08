@@ -5,8 +5,8 @@ This project aimed to store practical task's code for "Automated Testing Mentori
 https://aist.lab.epam.com/
 - This project stores demo of different tests leveles: unit tests, api tests and ui tests.
 - Each MR was reviwed and dicussed with experienced mentor.
-**Technlogies:** 
-- WebDriverIO + mocha
+- **Technlogies:** 
+ - - WebDriverIO + mocha
 
 
 
