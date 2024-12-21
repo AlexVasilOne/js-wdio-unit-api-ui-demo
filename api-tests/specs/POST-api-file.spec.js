@@ -22,5 +22,7 @@ describe('POST /api/file', () => {
     const postResponse = await sendRequest('api/file/', formData, true, 'post');
     expect(postResponse.status).to.equal(400);
     expect(postResponse.message.detail).to.equal('Invalid file type, only CSV allowed');
+    const getResponse = await sendRequest('api/file/');
+    expect(getResponse.data.files).not.to.include('sample-file.txt');
   });
 });

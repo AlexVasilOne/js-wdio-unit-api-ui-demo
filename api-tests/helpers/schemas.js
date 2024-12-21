@@ -28,7 +28,27 @@ const postApiFileSchema = {
   },
 };
 
+const getConfigMetrics = {
+  type: 'object',
+  required: ['Ragas', 'DeepEval'],
+  properties: {
+    DeepEval: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+    Ragas: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+  },
+};
+
 module.exports = {
   getApiFileSchema,
   postApiFileSchema,
+  getConfigMetrics,
 };
