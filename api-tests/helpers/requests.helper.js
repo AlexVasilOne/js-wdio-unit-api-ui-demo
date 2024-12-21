@@ -37,7 +37,7 @@ function createFormData(filePath) {
   const formData = new FormData();
   const fileBuffer = fs.readFileSync(filePath);
   formData.append('file', fileBuffer, {
-    contentType: 'text/csv',
+    contentType: filePath.toLowerCase().endsWith('.txt') ? 'text/plain' : 'text/csv',
     filename: 'sample-file.csv',
   });
   return formData;
