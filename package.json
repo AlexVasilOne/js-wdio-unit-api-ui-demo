@@ -8,9 +8,10 @@
     "wdio:checkboxes": "wdio run ./src-wdio/config/wdio.conf.js --suite checkboxes",
     "wdio:uploading": "wdio run ./src-wdio/config/wdio.conf.js --suite uploading",
     "pretest": "npm run lint",
-    "test": "mocha",
+    "test:unit": "mocha --config ./unit-tests/configs/.mocharc.unit.json",
+    "test:api": "mocha --config ./api-tests/configs/.mocharc.api.json --require ./api-tests/configs/setup.js",
     "coverage": "c8 npm test",
-    "lint": "eslint ./ --fix"
+    "lint": "eslint ./"
   },
   "keywords": [],
   "author": "aleksei_vasilev6@epam.com",
@@ -29,12 +30,15 @@
   },
   "dependencies": {
     "@eslint/js": "^9.13.0",
+    "ajv": "^8.17.1",
     "allure-commandline": "^2.32.0",
+    "axios": "^1.7.9",
     "c8": "^10.1.2",
     "chai": "^4.5.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
+    "form-data": "^4.0.1",
     "globals": "^15.11.0",
     "mocha": "^10.8.0",
     "mochawesome": "^7.1.3"
