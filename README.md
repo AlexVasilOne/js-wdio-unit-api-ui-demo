@@ -1,12 +1,13 @@
-# js-automated-testing
+# Description
+This repository is dedicated to maintaining Test Automation Frameworks (TAF) based on WebdriverIO (WDIO). It serves as a storage for demonstrations of various test levels, including unit tests, API tests, and UI tests.
 
-This project aimed to store practical task's code for "Automated Testing Mentoring with JS: Basic" program. 
-- Automated tests was writed according to real production project test documentation: 
-https://aist.lab.epam.com/
-- This project stores demo of different tests leveles: unit tests, api tests and ui tests.
-- Each MR was reviwed and dicussed with experienced mentor.
-- **Technlogies:** 
- - - WebDriverIO + mocha
+**Key Features:** <br>
+- The automated tests have been written in accordance with the test documentation of the production project.
+- A .env file has been utilized for secure storage of sensitive data or "secrets".
+- The API tests have been crafted using the Mocha test runner, Axios HTTP client, and the Chai assertion library.
+- The UI tests are written using WebdriverIO, following the Page Object (PO) design pattern.
+
+
 
 
 
